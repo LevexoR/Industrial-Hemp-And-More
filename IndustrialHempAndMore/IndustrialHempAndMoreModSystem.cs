@@ -7,23 +7,29 @@ namespace IndustrialHempAndMore
 {
     public class IndustrialHempAndMoreModSystem : ModSystem
     {
-
-        // Called on server and client
-        // Useful for registering block/entity classes on both sides
+        // Called on both server and client - use for shared registrations
         public override void Start(ICoreAPI api)
         {
-            Mod.Logger.Notification("Hello from template mod: " + api.Side);
+            base.Start(api);
+            Mod.Logger.Notification("Industrial Hemp and More initialized - Side: " + api.Side);
         }
 
+        // Server-only logic (worldgen, crop growth, status effect application)
         public override void StartServerSide(ICoreServerAPI api)
         {
-            Mod.Logger.Notification("Hello from template mod server side: " + Lang.Get("industrialhempandmore:hello"));
+            base.StartServerSide(api);
+            Mod.Logger.Notification("Industrial Hemp and More - Server side ready");
+
+            // TODO: Register server-side systems here (e.g., PlayerTrySleep hook)
         }
 
+        // Client-only logic (visual effects, UI overlays, shaders)
         public override void StartClientSide(ICoreClientAPI api)
         {
-            Mod.Logger.Notification("Hello from template mod client side: " + Lang.Get("industrialhempandmore:hello"));
-        }
+            base.StartClientSide(api);
+            Mod.Logger.Notification("Industrial Hemp and More - Client side ready");
 
+            // TODO: Register client-side event listeners here (e.g., vision effects)
+        }
     }
 }
